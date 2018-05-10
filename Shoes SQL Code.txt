@@ -1,0 +1,120 @@
+create table customers(
+customer_id NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+username varchar2(255) unique not null,
+pass varchar2(255) not null,
+gender  VARCHAR(6) NOT NULL CHECK (Gender IN ('Male', 'Female')),
+constraint cu_id_pk primary key (customer_id)
+);
+
+create table shoes(
+shoe_id NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
+Category_id number not null,
+shoe_name  Varchar2(255) not null,
+size_id numeric not null, 
+price number(15,2),
+gender VARCHAR(6) NOT NULL CHECK (Gender IN ('Male', 'Female')),
+quantity_available numeric not null,
+constraint sh_id_pk primary key (shoe_id),
+constraint ca_fk foreign key (category_id) REFERENCES category_table (category_id)
+);
+
+
+create table size_table(
+size_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
+shoe_id numeric  not null,
+shoe_size varchar (255) not null, 
+CONSTRAINT s_id_pk primary key (size_id),
+
+constraint sh_fk foreign key (shoe_id) REFERENCES shoes (shoe_id)
+);
+
+create table category_table(
+category_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
+category_name varchar2(255) unique not null,
+constraint ca_id_pk primary key (category_id)
+);
+
+
+
+create table order_table(
+order_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
+shoe_id numeric not null,
+customer_id numeric not null,
+size_id numeric not null,
+category_id numeric not null,
+quantity numeric  not null,
+total numeric not null,
+constraint si_fk foreign key (shoe_id) REFERENCES shoes (shoe_id),
+constraint cu_fk foreign key (customer_id) REFERENCES customers (customer_id),
+constraint size_fk foreign key (size_id) REFERENCES size_table (size_id),
+constraint ca_fk foreign key (category_id) REFERENCES category_table (category_id),
+CONSTRAINT order_id_pk primary key (order_id)
+);
+
+insert into category_table (category_name)
+values('Business');
+
+insert into category_table (category_name)
+values('Outside');
+
+insert into category_table (category_name)
+values('Casual');
+
+insert into customers (username, pass, gender)
+values ('Mike', '12345', 'Male');
+
+insert into customers (username, pass, gender)
+values ('Emily', '12345', 'Female');
+
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(3, 'Nike', 2, 19.99,'Male', 99);
+
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(2, 'Timberland', 3, 29.99,'Male', 99);
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(1, 'Allen Edmonds', 1, 129.99,'Male', 99);
+
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(3, 'Marc jacobs', 4, 29.99,'Female', 99);
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(2, 'Adidas', 5, 59.99,'Female', 99);
+
+insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
+values(1, 'Bruno Magli', 6, 329.99,'Female', 99);
+
+insert into size_table(shoe_id, SHOE_SIZE )
+values (1, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (1, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (1, 'Medium');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (2, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (2, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (2, 'Medium');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (3, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (3, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (3, 'Medium');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (4, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (4, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (4, 'Medium');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (5, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (5, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (5, 'Medium');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (6, 'Large');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (6, 'Small');
+insert into size_table(shoe_id, SHOE_SIZE )
+values (6, 'Medium');
