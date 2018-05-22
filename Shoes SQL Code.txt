@@ -1,120 +1,63 @@
-create table customers(
-customer_id NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
-username varchar2(255) unique not null,
-pass varchar2(255) not null,
-gender  VARCHAR(6) NOT NULL CHECK (Gender IN ('Male', 'Female')),
-constraint cu_id_pk primary key (customer_id)
-);
-
-create table shoes(
-shoe_id NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL,
-Category_id number not null,
-shoe_name  Varchar2(255) not null,
-size_id numeric not null, 
-price number(15,2),
-gender VARCHAR(6) NOT NULL CHECK (Gender IN ('Male', 'Female')),
-quantity_available numeric not null,
-constraint sh_id_pk primary key (shoe_id),
-constraint ca_fk foreign key (category_id) REFERENCES category_table (category_id)
-);
-
-
-create table size_table(
-size_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
-shoe_id numeric  not null,
-shoe_size varchar (255) not null, 
-CONSTRAINT s_id_pk primary key (size_id),
-
-constraint sh_fk foreign key (shoe_id) REFERENCES shoes (shoe_id)
+create table customer(
+customer_id NUMERIC GENERATED ALWAYS AS IDENTITY( START WITH 1 INCREMENT BY 1) NOT NULL,
+user_name varchar2(255) not null unique,
+passwords varchar2(255) not null,
+email varchar2(255) not null unique,
+CONSTRAINT customer_pk PRIMARY KEY (customer_id)
 );
 
 create table category_table(
-category_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
-category_name varchar2(255) unique not null,
-constraint ca_id_pk primary key (category_id)
+category_id  NUMERIC GENERATED ALWAYS AS IDENTITY( START WITH 1 INCREMENT BY 1) NOT NULL,
+category_name VARCHAR2(255) not null unique,
+CONSTRAINT category_pk primary key (category_id)
 );
 
-
+create table shoes(
+shoe_id  NUMERIC GENERATED ALWAYS AS IDENTITY( START WITH 1 INCREMENT BY 1) NOT NULL,
+category_id numeric  not null, 
+shoe_name varchar2(255) not null unique,
+shoe_size numeric not null, 
+price  number (38,2) not null,
+Gender VARCHAR(6) NOT NULL CHECK (Gender IN ('male', 'female')),
+constraint category_fk foreign key (category_id) REFERENCES category_table (category_id),
+CONSTRAINT shoes_pk primary key (shoe_id)
+);
 
 create table order_table(
-order_id  NUMERIC GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULl,
+order_id  NUMERIC GENERATED ALWAYS AS IDENTITY( START WITH 1 INCREMENT BY 1) NOT NULL,
 shoe_id numeric not null,
-customer_id numeric not null,
-size_id numeric not null,
 category_id numeric not null,
-quantity numeric  not null,
-total numeric not null,
-constraint si_fk foreign key (shoe_id) REFERENCES shoes (shoe_id),
-constraint cu_fk foreign key (customer_id) REFERENCES customers (customer_id),
-constraint size_fk foreign key (size_id) REFERENCES size_table (size_id),
-constraint ca_fk foreign key (category_id) REFERENCES category_table (category_id),
-CONSTRAINT order_id_pk primary key (order_id)
+customer_id numeric not null,
+order_quantity numeric not null,
+subtotal number(38,2),
+constraint categorys_fk foreign key (category_id) REFERENCES category_table (category_id),
+constraint shoes_fk foreign key (shoe_id) REFERENCES shoes (shoe_id),
+constraint customer_fk foreign key (customer_id) REFERENCES customer (customer_id),
+CONSTRAINT order_pk primary key (order_id)
 );
 
-insert into category_table (category_name)
-values('Business');
+INSERT INTO category_table (category_name)
+VALUES ('Business' );
+INSERT INTO category_table (category_name)
+VALUES ('Outdoor' );
+INSERT INTO category_table (category_name)
+VALUES ('Casual' );
 
-insert into category_table (category_name)
-values('Outside');
+INSERT INTO customer (user_name, passwords, email)
+VALUES ('tim','tim123', 'tim@gmail.com');
 
-insert into category_table (category_name)
-values('Casual');
+INSERT INTO customer (user_name, passwords, email)
+VALUES ('blake','blake123', 'blake@gmail.com');
 
-insert into customers (username, pass, gender)
-values ('Mike', '12345', 'Male');
-
-insert into customers (username, pass, gender)
-values ('Emily', '12345', 'Female');
-
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(3, 'Nike', 2, 19.99,'Male', 99);
-
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(2, 'Timberland', 3, 29.99,'Male', 99);
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(1, 'Allen Edmonds', 1, 129.99,'Male', 99);
-
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(3, 'Marc jacobs', 4, 29.99,'Female', 99);
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(2, 'Adidas', 5, 59.99,'Female', 99);
-
-insert into shoes (Category_id, shoe_name, size_id, price, gender,quantity_available)
-values(1, 'Bruno Magli', 6, 329.99,'Female', 99);
-
-insert into size_table(shoe_id, SHOE_SIZE )
-values (1, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (1, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (1, 'Medium');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (2, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (2, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (2, 'Medium');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (3, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (3, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (3, 'Medium');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (4, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (4, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (4, 'Medium');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (5, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (5, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (5, 'Medium');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (6, 'Large');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (6, 'Small');
-insert into size_table(shoe_id, SHOE_SIZE )
-values (6, 'Medium');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (1,'ZeroGrand Stitchlite Wingtip', 12,180,'male');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (1,'Hazel Pointy Toe Pump', 5,139.95,'female');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (2,'Wolverine 1000 Mile 1940 Boot', 12,415.00,'male');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (2,'Shaye Rubber Shearling Lined Glossed Waterproof Rain Bootsp', 7,80.00,'female');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (3,'Phinx Canvas Boat Shoes', 11,44.99,'male');
+INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
+VALUES (3,'CROWN VINTAGE MIAA LOAFER', 4,52.99,'female');
