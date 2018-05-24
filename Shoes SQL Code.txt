@@ -37,11 +37,11 @@ CONSTRAINT order_pk primary key (order_id)
 );
 
 INSERT INTO category_table (category_name)
-VALUES ('Business' );
+VALUES ('business' );
 INSERT INTO category_table (category_name)
-VALUES ('Outdoor' );
+VALUES ('outdoor' );
 INSERT INTO category_table (category_name)
-VALUES ('Casual' );
+VALUES ('casual' );
 
 INSERT INTO customer (user_name, passwords, email)
 VALUES ('tim','tim123', 'tim@gmail.com');
@@ -50,14 +50,16 @@ INSERT INTO customer (user_name, passwords, email)
 VALUES ('blake','blake123', 'blake@gmail.com');
 
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (1,'ZeroGrand Stitchlite Wingtip', 12,180,'male');
+VALUES (1,'zerogrand stitchlite wingtip', 12,180,'male');
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (1,'Hazel Pointy Toe Pump', 5,139.95,'female');
+VALUES (1,'hazel pointy toe pump', 5,139.95,'female');
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (2,'Wolverine 1000 Mile 1940 Boot', 12,415.00,'male');
+VALUES (2,'wolverine 1000 mile 1940 boot', 12,415.00,'male');
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (2,'Shaye Rubber Shearling Lined Glossed Waterproof Rain Bootsp', 7,80.00,'female');
+VALUES (2,'shaye rubber shearling lined glossed waterproof rain bootsp', 7,80.00,'female');
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (3,'Phinx Canvas Boat Shoes', 11,44.99,'male');
+VALUES (3,'phinx canvas boat shoes', 11,44.99,'male');
 INSERT INTO shoes (category_id, shoe_name, shoe_size, price,gender)
-VALUES (3,'CROWN VINTAGE MIAA LOAFER', 4,52.99,'female');
+VALUES (3,'crown vintage miaa loafer', 4,52.99,'female');
+
+commit;
