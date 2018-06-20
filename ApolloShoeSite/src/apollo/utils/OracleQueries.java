@@ -18,8 +18,8 @@ public class OracleQueries {
 	public final static String GETCUSTOMERBYID = "select customer.user_name, customer.passwords, customer.email from customer "
 			+ " where customer_id = ? ";
 	
-	public final static String GETALLSHOES = "select shoes.shoe_name,  category_table.category_name, shoes.shoe_size, shoes.price, shoes.gender "
-			+ "from shoes shoes"
+	public final static String GETALLSHOES = "select shoe_id, shoe_name,  category_table.category_name, shoe_size, price, gender "
+			+ "from shoes "
 			+ " join category_table on shoes.CATEGORY_ID= category_table.CATEGORY_ID ";
 	
 	
@@ -28,6 +28,10 @@ public class OracleQueries {
 			+ " join category_table on shoes.CATEGORY_ID= category_table.CATEGORY_ID "
 			+ " where category_table.category_id = ?";
 	
+	public final static String GETSHOESBYSHOEID = "select shoe_name,  category_name, shoe_size, price, gender "
+			+ "from shoes "
+			+ " join category_table on shoes.CATEGORY_ID= category_table.CATEGORY_ID "
+			+ " where SHOE_ID = ?";
 	public final static String GETALLSHOESBYGENDER = "select shoe_name,  category_name, shoe_size, price, gender "
 			+ "from shoes "
 			+ " join category_table on shoes.CATEGORY_ID= category_table.CATEGORY_ID "

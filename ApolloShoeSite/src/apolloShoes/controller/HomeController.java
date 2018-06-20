@@ -144,7 +144,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping("Shoes")
+	@RequestMapping("/Shoes")
 	public ModelAndView shoePage() {
 		mav = new ModelAndView("Shoes");
 		return mav;
@@ -153,26 +153,31 @@ public class HomeController {
 	public ModelAndView shoesPage(@ModelAttribute("shoekey") @Valid Shoes shoe,
 		 HttpServletRequest req ) throws SQLException {
 		mav = new ModelAndView("Shoes");
-/*			List<Shoes>shoesPage = new ArrayList<Shoes>();
-		shoesPage=shoesDAO.getAllShoes();
-		for(Shoes s : shoesPage) {
-			System.out.println(s.getShoeName());
-		}
-		mav.addObject("shoeList",shoesPage);*/
+
 	
-		return mav; 
+		return mav;  
 	}
 
-	@RequestMapping("/Quantity")
-	public ModelAndView orderPage(@RequestParam("orderQuantity") String quantity, @ModelAttribute("shoekey") @Valid Shoes shoe,@ModelAttribute("orderkey") @Valid Order order,
-			@ModelAttribute("customerkey") @Valid Customer customer,HttpServletRequest req ) {
-		mav = new ModelAndView("Orderss");
+	@RequestMapping("/Orders")
+	public ModelAndView orderPage() {
+		mav = new ModelAndView("Orders");
 		
 		
 		return mav;
 	}
+
+	@RequestMapping(value= "/select-quantity/", method =RequestMethod.POST)
+	public ModelAndView orderPage(@RequestParam("sid") Integer number,HttpServletRequest req ) throws SQLException {
+		mav = new ModelAndView("Orders");
+		mav.addObject("shoeID", number);
 	
-		}
+		return mav; 
+	
+	}
+	
+}
+	
+
 	
 	
 

@@ -26,7 +26,7 @@ public class ShoeDAOTest {
 	}
 	*/
 
-		
+		 
 	
 	@Test
 	public void getAllShoesTest() throws SQLException {
@@ -36,7 +36,7 @@ public class ShoeDAOTest {
 		
 		listShoes = shoesDAO.getAllShoes();
 		for(Shoes s  : listShoes) {
-		System.out.println(s.getShoeName()+" "+ s.getCategoryName()+  " "+s.getShoeSize()+" "+s.getGender());
+		System.out.println(s.getShoeID()+" "+s.getShoeName()+" "+ s.getCategoryName()+  " "+s.getShoeSize()+" "+s.getGender());
 		}
 	}
 	

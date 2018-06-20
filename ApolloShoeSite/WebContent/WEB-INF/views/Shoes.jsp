@@ -12,7 +12,7 @@
 <title>The Shoes of the Gods</title>
 </head>
 <% Customer customer = (Customer) session.getAttribute("customerkey");  %>
-
+<% Shoes shoes = (Shoes) session.getAttribute("shoekey");  %>
 
 <body>
 <h1> The greatest Shoes in history</h1>
@@ -35,33 +35,37 @@
 </tr>
 
 <%
-	ShoesDAO shoeDAO = new ShoesDAO();
+ShoesDAO shoeDAO = new ShoesDAO();
 
+
+	List<Shoes> listOfShoes = new ArrayList<Shoes> ();
+	listOfShoes = shoeDAO.getAllShoes();
 	
- 	List<Shoes> listOfShoes = new ArrayList<Shoes> ();
- 	listOfShoes = shoeDAO.getAllShoes();
+
 	for(Shoes s : listOfShoes){
-		out.write("<tr>");
-		out.write("<td>"+s.getShoeName() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"</td>");
-		out.write("<td>"+s.getShoeSize() + "</td>");
-		out.write("<td>"+s.getPrice()  + "</td>");
-		out.write("<td>"+s.getGender() + "</td>");
-		out.write("<td><form action = 'Quantity'><select name= 'orderQuantity'>" +
-		"<option value ='Zero'>0</option>"+
-		"<option value ='One'>1</option>"+
-		" <option value ='Two'>2</option> "+
-		"<option value ='Three'>3</option>"+
-		"<option value ='four'>4</option>"+
-		" <option value ='Five'>5</option> "+
-		"<option value ='Six'>6</option>"+
-		" <option value ='Seven'>7</option> "+
-		"<option value ='Eight'>8</option>"+
-		"<option value ='Nine'>9</option>"+
-		" <option value ='Ten'>10</option> "+
-		"<input type= 'submit' name='order'  id='order' value= 'submit'>"+
-				"</td>" );
-		out.print("</tr>");
-	} 	
+	out.write("<tr>");
+	out.write("<td name='shoeID' value='"+s.getShoeID()+"'>"+s.getShoeID() +"</td>");
+	out.write("<td name='shoeName'>"+s.getShoeName() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"</td>");
+	out.write("<td name='shoeSize'>"+s.getShoeSize() + "</td>");
+	out.write("<td name='price'>"+s.getPrice()  + "</td>");
+	out.write("<td name = 'gender'>"+s.getGender() + "</td>");
+	out.write("<td><form action = 'select-quantity/?sid=" + s.getShoeID() + "' method='POST'><select name= 'orderQuantity'>" +
+	"<option value ='' disabled hidden selected>0</option>"+
+	"<option value ='1'>1</option>"+
+	" <option value ='2'>2</option> "+
+	"<option value ='3'>3</option>"+
+	"<option value ='4'>4</option>"+
+	" <option value ='5'>5</option> "+
+	"<option value ='6'>6</option>"+
+	" <option value ='7'>7</option> "+
+	"<option value ='8'>8</option>"+
+	"<option value ='9'>9</option>"+
+	" <option value ='10'>10</option> "+
+	"<input type= 'submit'  name='order' value='"+s.getShoeID()+"' 'submit'>"+
+			"</td>" );
+	out.print("</tr>");
+}
+
 
 
 %>

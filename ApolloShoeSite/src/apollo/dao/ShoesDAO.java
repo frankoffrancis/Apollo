@@ -29,12 +29,13 @@ public class ShoesDAO {
 			
 			while(result.next()) {
 				Shoes shoes = new Shoes();
-				shoes.setShoeName(result.getString(1));
-				shoes.setCategoryName(result.getString(2));
-				shoes.setShoeSize(result.getInt(3));
-				shoes.setPrice(result.getDouble(4));
+				shoes.setShoeID(result.getInt(1));
+				shoes.setShoeName(result.getString(2));
+				shoes.setCategoryName(result.getString(3));
+				shoes.setShoeSize(result.getInt(4));
+				shoes.setPrice(result.getDouble(5));
 			
-				shoes.setGender(result.getString(5));
+				shoes.setGender(result.getString(6));
 				listOfShoes.add(shoes);
 				
 			}
@@ -276,6 +277,43 @@ public class ShoesDAO {
 			conn = OracleConnection.getConnection();
 			stmt = conn.prepareStatement(OracleQueries.GETSHOEBYNAME);
 			stmt.setString(1, shoeName);
+			result = stmt.executeQuery();
+			
+			if (result.next() && result !=null) {
+				shoes.setShoeName(result.getString(1));
+				shoes.setCategoryName(result.getString(2));
+				shoes.setShoeSize(result.getInt(3));
+				shoes.setPrice(result.getDouble(4));
+			
+				shoes.setGender(result.getString(5));
+				
+			}
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			result.close();
+			if(stmt!=null ) {
+				stmt.close();
+				
+			}
+			if(conn !=null) {
+				conn.close();
+			}
+		}
+		return shoes;
+	}
+	
+	public Shoes getShoeByID(Integer shoeID) throws SQLException {
+		Shoes shoes = new Shoes();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		
+		try {
+			conn = OracleConnection.getConnection();
+			stmt = conn.prepareStatement(OracleQueries.GETSHOEBYNAME);
+			stmt.setInt(1, shoeID);
 			result = stmt.executeQuery();
 			
 			if (result.next() && result !=null) {
