@@ -29,14 +29,13 @@
 	//Shoes shoes = new Shoes();
 	ShoesDAO  shoesDAO = new ShoesDAO();
 	
-	int shoeID = Integer.parseInt(request.getAttribute("shoeID").toString());
+	int shoeID = (Integer)request.getAttribute("shoeID");
 	//out.write(shoeID); 
 	
 	Shoes shoes = new Shoes();
 	shoes = shoesDAO.getShoeByID(shoeID);
-	int quantity = Integer.parseInt(request.getParameter("orderQuantity"));
-
-	out.print(shoes.getShoeID());
+	int quantity = (Integer)request.getAttribute("orderQuantity");
+	order.setCustomer_ID(customer.getCustomerID());
 	order.setShoe_ID(shoeID);
 	order.setOrderQuantity(quantity);
 	order.setSubTotal(shoes.getPrice()*order.getOrderQuantity());

@@ -166,10 +166,11 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value="/select-quantity", method =RequestMethod.POST)
-	public ModelAndView orderPage(@RequestParam("sid") Integer number, HttpServletRequest req ) throws SQLException {
+	@RequestMapping(value="/select-quantity/", method =RequestMethod.POST)
+	public ModelAndView orderPage(@RequestParam("sid") Integer number, @RequestParam("orderQuantity") Integer quantity ) throws SQLException {
 		mav = new ModelAndView("Orders");
 		mav.addObject("shoeID", number);
+		mav.addObject("orderQuantity", quantity);
 		return mav; 
 	
 	}
