@@ -40,7 +40,7 @@ public class HomeController {
 	private Shoes shoe  = new Shoes();;
 	private Order order;
 	private Customer customer1 = new Customer();
-	@ModelAttribute("customerkey")
+	@ModelAttribute("cuskey")
 	public Customer setUpUserForm() {
 		return new Customer();
 	}
@@ -60,7 +60,7 @@ public class HomeController {
 	 binder.set
  }*/
 	@RequestMapping(value="/process-register", method = RequestMethod.POST)
-	public ModelAndView register(@ModelAttribute("customerkey")@Valid Customer customer,
+	public ModelAndView register(@ModelAttribute("cuskey")@Valid Customer customer,
 			BindingResult errors) throws SQLException {
 		ModelAndView mav = null;
 		
@@ -91,7 +91,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/process-login" , method = RequestMethod.POST)
-	public ModelAndView login (@ModelAttribute("customerkey")@Valid Customer customer,
+	public ModelAndView login (@ModelAttribute("cuskey")@Valid Customer customer,
 			BindingResult errors, HttpServletRequest req) throws SQLException{
 		ModelAndView mav = null;
 
@@ -101,7 +101,7 @@ public class HomeController {
 		if(customer !=null) {
 			session = req.getSession();
 			session.setAttribute("customerkey", customer);
-			
+			System.out.println(customer.getCustomerID());
 		 mav = new ModelAndView("redirect:Customer");
 		}
 		else {
@@ -133,7 +133,7 @@ public class HomeController {
 	public ModelAndView user_info_changes(@ModelAttribute Customer customer,
 			@SessionAttribute ("customerkey")Customer ckey,ModelAndView mav) throws SQLException {
 		System.out.println("Hello");
-		customer.setCustomerID(ckey.getCustomerID());
+//		customer.setCustomerID(ckey.getCustomerID());
 		
 		boolean isUpdated = customerDAO.updatePassword(customer);
 		if(isUpdated) {
@@ -167,10 +167,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value="/select-quantity", method =RequestMethod.POST)
-	public ModelAndView orderPage(@RequestParam("sid") Integer number,HttpServletRequest req ) throws SQLException {
+	public ModelAndView orderPage(@RequestParam("sid") Integer number, HttpServletRequest req ) throws SQLException {
 		mav = new ModelAndView("Orders");
 		mav.addObject("shoeID", number);
-		System.out.println("in here");
 		return mav; 
 	
 	}

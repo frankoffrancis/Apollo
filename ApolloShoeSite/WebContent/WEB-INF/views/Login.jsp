@@ -8,7 +8,7 @@
 <title>Login Page</title>
 </head>
 <body>
-<form:form action="process-login" method= "POST" modelAttribute="customerkey" >
+<form:form action="process-login" method= "POST" modelAttribute="cuskey" >
 <h1>  Welcome to the login page of Apollo Shoes</h1>
 	<h2> Please login to start your shopping experience</h2>
 <label> Email</label>

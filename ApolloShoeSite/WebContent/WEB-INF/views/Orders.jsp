@@ -12,6 +12,7 @@
 <title>Orders Page</title>
 </head>
 <% Customer customer = (Customer) session.getAttribute("customerkey");  %>
+
 <body>
 <h1> Orders </h1>
 <form action=""></form>
@@ -25,19 +26,22 @@
 <th> </th>
 <% Order order = new Order();
 	OrderDAO orderDAO = new OrderDAO();
-	Shoes shoes = new Shoes();
+	//Shoes shoes = new Shoes();
 	ShoesDAO  shoesDAO = new ShoesDAO();
 	
 	int shoeID = Integer.parseInt(request.getAttribute("shoeID").toString());
 	//out.write(shoeID); 
+	
+	Shoes shoes = new Shoes();
 	shoes = shoesDAO.getShoeByID(shoeID);
 	int quantity = Integer.parseInt(request.getParameter("orderQuantity"));
-	order.setCustomer_ID(customer.getCustomerID());
+
+	out.print(shoes.getShoeID());
 	order.setShoe_ID(shoeID);
 	order.setOrderQuantity(quantity);
 	order.setSubTotal(shoes.getPrice()*order.getOrderQuantity());
-	//order.setSubTotal(order.getOrderQuantity()*shoes.getPrice());
-	//orderDAO.addOrder(order);
+	Integer isAdded = 0;
+	//isAdded=orderDAO.addOrder(order);
 	
 	if (shoeID !=0){
 		out.write("<tr>");

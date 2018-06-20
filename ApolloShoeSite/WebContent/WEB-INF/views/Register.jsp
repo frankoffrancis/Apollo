@@ -10,7 +10,7 @@
 <body>
 <h1>Welcome to the registration page for Apollo shoes </h1>
 
-<form:form action="process-register" method= "POST" modelAttribute="customerkey">
+<form:form action="process-register" method= "POST" modelAttribute="cuskey">
 	
 	<label>User Name</label>
 		<form:input type="text" id="userName" placeholder="User Name" path="userName"/>

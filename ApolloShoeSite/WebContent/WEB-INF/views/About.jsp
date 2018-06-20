@@ -16,7 +16,6 @@
 
 </nav>
 <p> Apollo Shoes was founded in 1080 BC by the great God himself Zeus. It wasn't until 80 AD that Zeus handed control of Apollo Shoes to his 
-son Artemis. Artemis hated working at Apollo Shoes and wanted to destroy it. But whatever he did made Apollo Shoes more successful. That to him Apollo 
-Shoes is a well beloved shoe company. </p>
+son Apollo. All shoes from Apollo are made from the finest factories in China.  </p>
 </body>
 </html>

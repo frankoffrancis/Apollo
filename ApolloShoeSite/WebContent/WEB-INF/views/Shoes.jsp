@@ -44,6 +44,7 @@ ShoesDAO shoeDAO = new ShoesDAO();
 	
 
 	for(Shoes s : listOfShoes){
+		System.out.println(s.getShoeID());
 	out.write("<tr>");
 	out.write("<td name='shoeID' value='"+s.getShoeID()+"'>"+s.getShoeID() +"</td>");
 	out.write("<td name='shoeName'>"+s.getShoeName() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"</td>");
