@@ -312,7 +312,7 @@ public class ShoesDAO {
 		
 		try {
 			conn = OracleConnection.getConnection();
-			stmt = conn.prepareStatement(OracleQueries.GETSHOEBYNAME);
+			stmt = conn.prepareStatement(OracleQueries.GETSHOESBYSHOEID);
 			stmt.setInt(1, shoeID);
 			result = stmt.executeQuery();
 			

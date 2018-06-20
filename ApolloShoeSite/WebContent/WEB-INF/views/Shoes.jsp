@@ -26,6 +26,7 @@
 <form action=""></form>
 <table>
 <tr>
+<th>Shoe ID </th>
 <th>Shoe Name </th>
 <th>Shoe Size </th>
 <th>Shoe Price </th>
@@ -49,7 +50,7 @@ ShoesDAO shoeDAO = new ShoesDAO();
 	out.write("<td name='shoeSize'>"+s.getShoeSize() + "</td>");
 	out.write("<td name='price'>"+s.getPrice()  + "</td>");
 	out.write("<td name = 'gender'>"+s.getGender() + "</td>");
-	out.write("<td><form action = 'select-quantity/?sid=" + s.getShoeID() + "' method='POST'><select name= 'orderQuantity'>" +
+	out.write("<td><form action='select-quantity/?sid=" + s.getShoeID() + " ' method='POST'><select name= 'orderQuantity'>" +
 	"<option value ='' disabled hidden selected>0</option>"+
 	"<option value ='1'>1</option>"+
 	" <option value ='2'>2</option> "+
@@ -61,9 +62,11 @@ ShoesDAO shoeDAO = new ShoesDAO();
 	"<option value ='8'>8</option>"+
 	"<option value ='9'>9</option>"+
 	" <option value ='10'>10</option> "+
-	"<input type= 'submit'  name='order' value='"+s.getShoeID()+"' 'submit'>"+
-			"</td>" );
+	"<input type='submit'  name='order' value='"+s.getShoeID()+"'>"+
+			"</select> </td>" );
+	
 	out.print("</tr>");
+
 }
 
 

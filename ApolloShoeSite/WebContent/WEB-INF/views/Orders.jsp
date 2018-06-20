@@ -17,7 +17,6 @@
 <form action=""></form>
 <table>
 <tr>
-<th>Shoe ID </th>
 <th>Shoe Name </th>
 <th>Gender </th>
 <th>Shoe Size </th>
@@ -29,26 +28,27 @@
 	Shoes shoes = new Shoes();
 	ShoesDAO  shoesDAO = new ShoesDAO();
 	
-	int shoeID = Integer.parseInt(request.getParameter("shoeID"));
-	out.write(shoeID); 
+	int shoeID = Integer.parseInt(request.getAttribute("shoeID").toString());
+	//out.write(shoeID); 
 	shoes = shoesDAO.getShoeByID(shoeID);
 	int quantity = Integer.parseInt(request.getParameter("orderQuantity"));
 	order.setCustomer_ID(customer.getCustomerID());
 	order.setShoe_ID(shoeID);
 	order.setOrderQuantity(quantity);
-	
+	order.setSubTotal(shoes.getPrice()*order.getOrderQuantity());
 	//order.setSubTotal(order.getOrderQuantity()*shoes.getPrice());
 	//orderDAO.addOrder(order);
 	
+	if (shoeID !=0){
 		out.write("<tr>");
-		out.write("<td>"+shoes.getShoeID()+"</td>");
 		out.write("<td>"+shoes.getShoeName() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"</td>");
 		out.write("<td>"+shoes.getGender() + "</td>");
 		out.write("<td>"+shoes.getShoeSize() + "</td>");
 		out.write("<td>"+order.getOrderQuantity() + "</td>");
-		//out.write("<td>"+order.getSubTotal()+"</td>");
+		out.write("<td>"+order.getSubTotal()+"</td>");
 	
-
+	
+	}
 %>
 
 </tr>

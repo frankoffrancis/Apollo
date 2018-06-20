@@ -158,7 +158,7 @@ public class HomeController {
 		return mav;  
 	}
 
-	@RequestMapping("/Orders")
+	@RequestMapping("/select-quantity")
 	public ModelAndView orderPage() {
 		mav = new ModelAndView("Orders");
 		
@@ -166,11 +166,11 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value= "/select-quantity/", method =RequestMethod.POST)
+	@RequestMapping(value="/select-quantity", method =RequestMethod.POST)
 	public ModelAndView orderPage(@RequestParam("sid") Integer number,HttpServletRequest req ) throws SQLException {
 		mav = new ModelAndView("Orders");
 		mav.addObject("shoeID", number);
-	
+		System.out.println("in here");
 		return mav; 
 	
 	}
