@@ -59,19 +59,20 @@ public class HomeController {
  public void initBinder(WebDataBinder binder) {
 	 binder.set
  }*/
-	@RequestMapping(value="/process-register", method = RequestMethod.POST)
+		@RequestMapping(value="/process-register", method = RequestMethod.POST)
 	public ModelAndView register(@ModelAttribute("cuskey")@Valid Customer customer,
-			BindingResult errors) throws SQLException {
+			BindingResult errors, HttpServletRequest req) throws SQLException {
 		ModelAndView mav = null;
-		
 		if(errors.hasErrors()) {		
-			
+			System.out.println(customer.getEmail());
 			mav = new ModelAndView("Register");
 			System.out.println("testing");
 		return mav;
 		}
 
 		else { 
+			session = req.getSession();
+			session.setAttribute("customerkey", customer);
 		customerDAO.registerCustomer(customer.getUserName(), customer.getPassword(), customer.getEmail());
 		
 		
